@@ -2,7 +2,7 @@ import './Brand.css'
 
 const brand = () => {
     return (
-        <p className="Brand">Coder-Commerce</p>
+        <p className="Brand">DeTodoStore!</p>
     )
 }
 

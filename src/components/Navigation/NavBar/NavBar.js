@@ -5,18 +5,18 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 const navBar = () => {
     const categories = [
         {
-            name: 'Vehicles',
-            descrip: 'Vehículos',
+            name: 'Notebooks',
+            descrip: 'Notebooks',
             linkTo: '',
         },
         {
-            name: 'Computers',
-            descrip: 'Computadoras',
+            name: 'MobilePhones',
+            descrip: 'Celulares',
             linkTo: '',
         },
         {
-            name: 'Books',
-            descrip: 'Libros',
+            name: 'Tablets',
+            descrip: 'Tablets',
             linkTo: '',
         },
     ]
@@ -25,11 +25,6 @@ const navBar = () => {
         <header className="NavBar">
             <Brand />
             <NavigationItems items={categories} />
-            <NavigationItems items={[{
-                name: 'Login',
-                descrip: 'Ingresar',
-                linkTo: '',
-            }]} />
         </header>
     )
 }
