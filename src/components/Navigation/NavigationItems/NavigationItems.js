@@ -1,10 +1,11 @@
 import './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
-const navigationItems = () => (
+const navigationItems = (props) => (
     <ul className="NavigationItems">
-        <NavigationItem>Registrarse</NavigationItem>
-        <NavigationItem>Ingresar</NavigationItem>
+        {props.items.map(item => (
+            <NavigationItem key={item.name} linkTo={item.linkTo}>{item.descrip}</NavigationItem>
+        ))}
     </ul>
 );
 
