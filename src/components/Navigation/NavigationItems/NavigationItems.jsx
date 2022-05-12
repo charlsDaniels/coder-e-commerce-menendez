@@ -2,9 +2,9 @@ import './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 import CartWidget from './CartWidget';
 
-const navigationItems = props => (
+const navigationItems = () => (
     <ul className="NavigationItems">
-        <div className='Categories'>
+        <div className='Categories hide-on-small-only'>
             <NavigationItem>Notebooks</NavigationItem>
             <NavigationItem>Celulares</NavigationItem>
             <NavigationItem>Tablets</NavigationItem>

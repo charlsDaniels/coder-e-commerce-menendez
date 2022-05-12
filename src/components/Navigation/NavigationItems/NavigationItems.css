@@ -1,6 +1,6 @@
 .NavigationItems {
     list-style: none;
-    padding: 0; 
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,13 +10,18 @@
     display: flex;
 }
 
+.Cart {
+    position: relative;
+}
+
 .CartBadge {
     cursor: pointer;
-    position:absolute;
-    top: 38px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    right: 45px;
-    color: "#000";
+    width: 20px;
+    color: #fff;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    left: 25px;
     z-index: 1;
 }
