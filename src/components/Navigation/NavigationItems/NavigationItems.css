@@ -9,3 +9,14 @@
 .Categories {
     display: flex;
 }
+
+.CartBadge {
+    cursor: pointer;
+    position:absolute;
+    top: 38px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    right: 45px;
+    color: "#000";
+    z-index: 1;
+}
