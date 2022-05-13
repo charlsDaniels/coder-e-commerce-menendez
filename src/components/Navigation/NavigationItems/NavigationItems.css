@@ -14,7 +14,7 @@
     position: relative;
 }
 
-.CartBadge {
+.Cart .Badge {
     cursor: pointer;
     width: 20px;
     color: #fff;
