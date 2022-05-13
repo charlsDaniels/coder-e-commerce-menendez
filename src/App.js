@@ -1,12 +1,14 @@
-import './App.css';
 import NavBar from './components/Navigation/NavBar/NavBar';
+import Container from '@mui/material/Container';
 import ItemListContainer from './components/Products/ItemListContainer';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <NavBar />
-      <ItemListContainer greeting="Bienvenidos!!!" />
+      <Container maxWidth="lg" sx={{ marginTop: 6 }}>
+        <ItemListContainer greeting="Bienvenido!!!"/>
+      </Container>
     </div>
   );
 }

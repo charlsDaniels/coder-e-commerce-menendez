@@ -1,14 +1,28 @@
-import './NavBar.css';
-import Brand from '../../Brand/Brand';
-import NavigationItems from '../NavigationItems/NavigationItems';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import Brand from '../../Brand/Logo';
+import AsideMenu from './Aside/AsideMenu';
+import NavigationItems from './NavigationItems/NavigationItems';
 
-const navBar = () => {
-    return (
-        <header className="NavBar">
-            <Brand />
-            <NavigationItems />
-        </header>
-    )
-}
+const pages = ['Computadoras', 'Vehículos', 'Ropa'];
 
-export default navBar;
+const NavBar = () => {
+  return (
+    <AppBar position="static" sx={{
+      backgroundColor: '#A7D26E'
+    }}>
+      <Container maxWidth="xl">
+        <Toolbar>
+
+          <AsideMenu pages={pages} />
+
+          <Brand />
+
+          <NavigationItems pages={pages}/>
+        </Toolbar>
+      </Container>
+    </AppBar >
+  );
+};
+export default NavBar;
