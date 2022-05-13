@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
 
-
 const CartWidget = () => {
     return (
         <Box sx={{ flexGrow: 0 }}>
