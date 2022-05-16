@@ -9,9 +9,7 @@ const pages = ['Computadoras', 'Vehículos', 'Ropa'];
 
 const NavBar = () => {
   return (
-    <AppBar position="static" sx={{
-      backgroundColor: '#A7D26E'
-    }}>
+    <AppBar position="static" primary>
       <Container maxWidth="xl">
         <Toolbar>
 

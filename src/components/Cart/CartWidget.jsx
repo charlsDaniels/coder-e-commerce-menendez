@@ -10,7 +10,7 @@ const CartWidget = () => {
             <Tooltip title="Ver carrito">
                 <IconButton sx={{ p: 0 }}>
                     <Badge badgeContent={4} color="success">
-                        <ShoppingCart alt="Carrito de compras" color="primary" fontSize="large" />
+                        <ShoppingCart alt="Carrito de compras" color="secondary" fontSize="large" />
                     </Badge>
                 </IconButton>
             </Tooltip>

@@ -11,11 +11,9 @@ const Brand = () => {
         flexGrow:  0.9,
         fontFamily: 'monospace',
         fontWeight: 700,
-        color: '#000',
-        textDecoration: 'none',
       }}
     >
-      DeTodoStore
+      CharlStore
     </Typography>
   )
 }

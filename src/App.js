@@ -1,15 +1,52 @@
 import NavBar from './components/Navigation/NavBar/NavBar';
 import Container from '@mui/material/Container';
-import ItemListContainer from './components/Products/ItemListContainer';
+import ItemListContainer from './containers/Items/ItemListContainer';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
-function App() {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#96C5B0',
+      textColor: "white"
+    },
+    secondary: {
+      main: '#553555'
+    },
+  },
+});
+
+const App = () => {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <NavBar />
-      <Container maxWidth="lg" sx={{ marginTop: 6 }}>
-        <ItemListContainer greeting="Bienvenido!!!"/>
+      <Container maxWidth="lg" sx={{ mt: 6 }}>
+        <Breadcrumbs mb={4} aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            Ropa
+          </Link>
+          <Link
+            underline="hover"
+            color="inherit"
+            href="#"
+          >
+            Hombres
+          </Link>
+          <Link
+            underline="hover"
+            color="text.primary"
+            href="#"
+            aria-current="page"
+          >
+            Camisas
+          </Link>
+        </Breadcrumbs>
+
+        <ItemListContainer />
+
       </Container>
-    </div>
+    </ThemeProvider>
   );
 }
 

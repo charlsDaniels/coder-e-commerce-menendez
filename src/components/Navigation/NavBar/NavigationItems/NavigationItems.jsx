@@ -9,7 +9,7 @@ const NavigationItems = ({ pages }) => {
                 {pages.map((page) => (
                     <Button
                         key={page}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
+                        sx={{ my: 2, color: '#000000', display: 'block' }}
                     >
                         {page}
                     </Button>
