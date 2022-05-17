@@ -1,9 +1,8 @@
-import Box from "@mui/material/Box";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-import ItemList from "../../components/Items/ItemList";
-import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import ItemList from "../../components/Items/ItemList";
+import Loader from "../../components/UI/Loader";
+import { productsDb } from "../../db/db";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
@@ -12,31 +11,9 @@ const ItemListContainer = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const products = await new Promise((resolved, rejected) => {
+      const products = await new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolved([
-            {
-              id: "1",
-              title: "Tiger",
-              description: "Camisa animal print de seda",
-              price: "$5.600",
-              pictureUrl: "/images/camisa-tiger.jpg",
-            },
-            {
-              id: "2",
-              title: "Black",
-              description: "Camisa negra de algodón",
-              price: "$3.500",
-              pictureUrl: "/images/camisa-negra.jpg",
-            },
-            {
-              id: "3",
-              title: "Hawaian",
-              description: "Camisa hawaiana de seda",
-              price: "$3.900",
-              pictureUrl: "/images/camisa-hawaiana.jpg",
-            },
-          ]);
+          resolve(productsDb);
         }, 2000);
       });
       setProducts(products);
@@ -53,12 +30,7 @@ const ItemListContainer = () => {
 
   return (
     <Box>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-      >
-        <CircularProgress />
-      </Backdrop>
+      <Loader visible={loading}/>
 
       {products && <ItemList items={products} />}
     </Box>

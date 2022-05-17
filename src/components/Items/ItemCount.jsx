@@ -9,18 +9,18 @@ const ItemCount = ({ stock, initial, onAdd }) => {
     const [quantity, setQuantity] = useState(initial)
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-            <Typography variant="body2">
+        <Box sx={{ display: 'flex', gap: '10px'}}>
+            {/* <Typography variant="body2">
                 Elegir cantidad (máximo: {stock} unidades)
-            </Typography>
+            </Typography> */}
 
-            <ButtonGroup color="secondary">
+            <ButtonGroup size="small" color="secondary">
                 <Button disabled={quantity === 0} onClick={() => setQuantity(quantity - 1)}>-</Button>
                 <Button>{quantity}</Button>
                 <Button disabled={quantity === stock} onClick={() => setQuantity(quantity + 1)}>+</Button>
             </ButtonGroup>
 
-            <Button color="secondary" disabled={quantity === 0} variant="outlined" onClick={() => onAdd(quantity)}>Agregar</Button>
+            <Button size="small" color="secondary" disabled={quantity === 0} variant="outlined" onClick={() => onAdd(quantity)}>Agregar</Button>
         </Box>
     );
 }

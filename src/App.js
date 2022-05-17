@@ -1,6 +1,7 @@
 import TheNavbar from "./components/Navigation/Navbar/TheNavbar";
 import Container from "@mui/material/Container";
 import ItemListContainer from "./containers/Items/ItemListContainer";
+import ItemDetailContainer from "./containers/Items/ItemDetailContainer";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -39,7 +40,8 @@ const App = () => {
           </Link>
         </Breadcrumbs>
 
-        <ItemListContainer />
+        {/* <ItemListContainer /> */}
+        <ItemDetailContainer productId={2} />
       </Container>
     </ThemeProvider>
   );
