@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# CharlStore E-commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto está realizado en React como práctica para el curso de coder-house. 
 
 ## Available Scripts
 
