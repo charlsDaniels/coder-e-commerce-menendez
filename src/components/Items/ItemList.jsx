@@ -1,3 +1,4 @@
+//@ts-check
 import Box from "@mui/material/Box";
 import Item from "./Item";
 

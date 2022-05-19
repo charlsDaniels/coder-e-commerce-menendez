@@ -41,7 +41,7 @@ const ItemDetail = ({ item }) => {
         src={item.pictureUrl}
       />
       <Box>
-        <Typography variant="h6">Camisa {item.title}</Typography>
+        <Typography variant="h6">{item.title}</Typography>
         <Typography variant="body2" ml={2}>
           {item.price}
         </Typography>
