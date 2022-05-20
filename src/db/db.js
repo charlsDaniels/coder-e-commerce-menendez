@@ -1,7 +1,7 @@
 const productsDb = [
   {
     id: 1,
-    categoryId: "CAMISAS",
+    categoryId: "camisas",
     title: "Tiger",
     description: "Camisa animal print de seda",
     price: "5.600,00 ",
@@ -10,7 +10,7 @@ const productsDb = [
   },
   {
     id: 2,
-    categoryId: "CAMISAS",
+    categoryId: "camisas",
     title: "Black",
     description:
       "Camisa slim fit de poplin 60/1. • 100% algodón. • Con cuello clásico. • Bordado de marca.",
@@ -20,7 +20,7 @@ const productsDb = [
   },
   {
     id: 3,
-    categoryId: "CAMISAS",
+    categoryId: "camisas",
     title: "Hawaian",
     description: "Camisa hawaiana de seda",
     price: "3.960,00 ARS",
@@ -29,7 +29,7 @@ const productsDb = [
   },
   {
     id: 4,
-    categoryId: "REMERAS",
+    categoryId: "remeras",
     title: "Guns",
     description: "Remera de la mejor banda de todas",
     price: "3.460,00 ARS",

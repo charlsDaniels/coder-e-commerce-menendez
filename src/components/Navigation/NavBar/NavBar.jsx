@@ -5,7 +5,7 @@ import Brand from "../../Brand/Logo";
 import AsideMenu from "./Aside/AsideMenu";
 import NavigationItems from "./NavigationItems/NavigationItems";
 
-const pages = ["CAMISAS", "REMERAS"];
+const pages = ["camisas", "remeras"];
 
 const TheNavbar = () => {
   return (

@@ -30,6 +30,10 @@ const ItemDetail = ({ item }) => {
 
   const handleCloseModal = () => setShowModal(false);
 
+  const productTitle = () => {
+    return `${item.categoryId.slice(0, -1)} ${item.title}`
+  }
+
   return (
     <Container sx={{ display: "flex", mt: 6, ml: 7, gap: 5 }}>
       <Box
@@ -41,7 +45,7 @@ const ItemDetail = ({ item }) => {
         src={item.pictureUrl}
       />
       <Box>
-        <Typography variant="h6">{item.title}</Typography>
+        <Typography variant="h6" sx={{textTransform: 'capitalize'}}>{productTitle()}</Typography>
         <Typography variant="body2" ml={2}>
           {item.price}
         </Typography>
