@@ -10,14 +10,14 @@ const Brand = () => {
       to="/"
       sx={{
         display: 'flex',
-        flexGrow:  0.9,
+        flexGrow:  0.8,
         fontFamily: 'monospace',
         fontWeight: 700,
         color: "#000",
         textDecoration: 'none'
       }}
     >
-      CharlStore
+      CharlClothes
     </Typography>
   )
 }

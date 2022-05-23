@@ -46,7 +46,13 @@ const ItemListContainer = () => {
 
       {products && (
         <Box>
-          <Typography variant="h5" mb={5} sx={{textAlign: "center", textTransform: 'capitalize'}}>{categoryId}</Typography>
+          <Typography
+            variant="h5"
+            mb={5}
+            sx={{ textAlign: "center", textTransform: "capitalize" }}
+          >
+            {categoryId}
+          </Typography>
           <ItemList items={products} />
         </Box>
       )}

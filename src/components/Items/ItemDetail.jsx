@@ -6,6 +6,8 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import ItemCount from "./ItemCount";
 import Modal from "@mui/material/Modal";
+import { CartContext } from "../../hoc/providers/CartProvider";
+import { useContext } from "react";
 
 const modalStyle = {
   position: "absolute",
@@ -20,10 +22,13 @@ const modalStyle = {
 };
 
 const ItemDetail = ({ item }) => {
+  const cartContext = useContext(CartContext);
+
   const [purchasedItems, setPurchasedItems] = useState(0);
   const [openModal, setShowModal] = useState(false);
 
   const onAddHandler = (quantity) => {
+    cartContext.addItem(item, quantity);
     setPurchasedItems(quantity);
     setShowModal(true);
   };
@@ -31,8 +36,8 @@ const ItemDetail = ({ item }) => {
   const handleCloseModal = () => setShowModal(false);
 
   const productTitle = () => {
-    return `${item.categoryId.slice(0, -1)} ${item.title}`
-  }
+    return `${item.categoryId.slice(0, -1)} ${item.title}`;
+  };
 
   return (
     <Container sx={{ display: "flex", mt: 6, ml: 7, gap: 5 }}>
@@ -45,7 +50,9 @@ const ItemDetail = ({ item }) => {
         src={item.pictureUrl}
       />
       <Box>
-        <Typography variant="h6" sx={{textTransform: 'capitalize'}}>{productTitle()}</Typography>
+        <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
+          {productTitle()}
+        </Typography>
         <Typography variant="body2" ml={2}>
           {item.price}
         </Typography>
