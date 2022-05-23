@@ -5,35 +5,19 @@ import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import ItemCount from "./ItemCount";
-import Modal from "@mui/material/Modal";
 import { CartContext } from "../../hoc/providers/CartProvider";
 import { useContext } from "react";
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { NavLink } from "react-router-dom";
 
 const ItemDetail = ({ item }) => {
   const cartContext = useContext(CartContext);
 
-  const [purchasedItems, setPurchasedItems] = useState(0);
-  const [openModal, setShowModal] = useState(false);
+  const [showCheckoutBtn, setShowCheckoutBtn] = useState(false);
 
   const onAddHandler = (quantity) => {
     cartContext.addItem(item, quantity);
-    setPurchasedItems(quantity);
-    setShowModal(true);
+    setShowCheckoutBtn(true);
   };
-
-  const handleCloseModal = () => setShowModal(false);
 
   const productTitle = () => {
     return `${item.categoryId.slice(0, -1)} ${item.title}`;
@@ -63,7 +47,7 @@ const ItemDetail = ({ item }) => {
         <Box mt={3} sx={{ display: "flex", flexDirection: "column" }}>
           <Typography variant="overline">Selecciona tu talla</Typography>
 
-          <ButtonGroup size="small" color="secondary">
+          <ButtonGroup size="small" color="secondary" variant="outlined">
             <Button>XS</Button>
             <Button>S</Button>
             <Button>M</Button>
@@ -76,21 +60,20 @@ const ItemDetail = ({ item }) => {
           {item.description}
         </Typography>
 
-        <ItemCount stock={10} initial={1} onAdd={onAddHandler}></ItemCount>
+        {showCheckoutBtn ? (
+          <Button
+            component={NavLink}
+            to={`/cart`}
+            color="secondary"
+            variant="contained"
+            size="small"
+          >
+            Finalizar compra
+          </Button>
+        ) : (
+          <ItemCount stock={10} initial={1} onAdd={onAddHandler} />
+        )}
       </Box>
-
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Excelente! Agregaste {purchasedItems} productos!
-          </Typography>
-        </Box>
-      </Modal>
     </Container>
   );
 };

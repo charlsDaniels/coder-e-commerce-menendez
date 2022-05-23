@@ -28,7 +28,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         size="small"
         color="secondary"
         disabled={quantity === 0}
-        variant="outlined"
+        variant="contained"
         onClick={() => onAdd(quantity)}
       >
         Agregar
