@@ -17,7 +17,7 @@ const ItemDetailContainer = () => {
       const product = await new Promise((resolve) => {
         setTimeout(() => {
           resolve(productsDb.find((product) => product.id == productId));
-        }, 2000);
+        }, 0);
       });
       setProduct(product);
     } catch (error) {
@@ -33,7 +33,7 @@ const ItemDetailContainer = () => {
 
   return (
     <Box>
-      <Loader visible={loading} />
+      {loading && <Loader />}
 
       {product && <ItemDetail item={product} />}
     </Box>

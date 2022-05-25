@@ -13,12 +13,15 @@ const Item = ({ item }) => {
           elevation={5}
           sx={{
             borderRadius: 3,
+            "&:hover": {
+              transform: "scale(1.05)",
+            },
           }}
         >
           <CardContent>
             <CardHeader
               title={item.title}
-              subheader={item.price}
+              subheader={`$${item.price},00 `}
               sx={{ pt: 0 }}
             />
             <CardMedia
@@ -26,7 +29,7 @@ const Item = ({ item }) => {
               sx={{ objectFit: "contain" }}
               height="235"
               image={item.pictureUrl}
-              alt="Camisa"
+              alt={item.title}
             />
           </CardContent>
         </Card>

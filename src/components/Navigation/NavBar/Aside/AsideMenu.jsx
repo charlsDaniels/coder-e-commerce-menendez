@@ -49,8 +49,15 @@ const AsideMenu = ({ pages }) => {
         }}
       >
         {pages.map((page) => (
-          <MenuItem component={Link} to={`/category/${page}`} key={page} onClick={handleCloseNavMenu}>
-            <Typography textAlign="center">{page}</Typography>
+          <MenuItem
+            component={Link}
+            to={`/category/${page}`}
+            key={page}
+            onClick={handleCloseNavMenu}
+          >
+            <Typography textAlign="center" textTransform="capitalize">
+              {page}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>

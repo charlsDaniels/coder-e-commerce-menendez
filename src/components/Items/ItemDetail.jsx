@@ -12,11 +12,20 @@ import { NavLink } from "react-router-dom";
 const ItemDetail = ({ item }) => {
   const cartContext = useContext(CartContext);
 
+  const [stock, setStock] = useState(null);
+  const [initial, setInitial] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const [showCheckoutBtn, setShowCheckoutBtn] = useState(false);
 
   const onAddHandler = (quantity) => {
-    cartContext.addItem(item, quantity);
+    cartContext.addItem({...item, size: selectedSize}, quantity);
     setShowCheckoutBtn(true);
+  };
+
+  const selectSizeHandler = (size) => {
+    setSelectedSize(size.id);
+    setStock(size.stock);
+    setInitial(1);
   };
 
   const productTitle = () => {
@@ -38,29 +47,40 @@ const ItemDetail = ({ item }) => {
           {productTitle()}
         </Typography>
         <Typography variant="body2" ml={2}>
-          {item.price}
+          ${item.price},00
         </Typography>
         <Typography variant="body2" mt={2}>
           Hasta 6 cuotas sin interés
         </Typography>
 
-        <Box mt={3} sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography variant="overline">Selecciona tu talla</Typography>
+        {!showCheckoutBtn && (
+          <Box mt={3} sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="overline">Selecciona tu talla</Typography>
 
-          <ButtonGroup size="small" color="secondary" variant="outlined">
-            <Button>XS</Button>
-            <Button>S</Button>
-            <Button>M</Button>
-            <Button>L</Button>
-            <Button>XL</Button>
-          </ButtonGroup>
-        </Box>
+            <ButtonGroup size="small" color="secondary" variant="outlined">
+              {item.sizes.map((size) => (
+                <Button
+                  key={size.id}
+                  onClick={() => selectSizeHandler(size)}
+                  sx={{
+                    "&:focus": {
+                      backgroundColor: "#3B253B",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  {size.id}
+                </Button>
+              ))}
+            </ButtonGroup>
+          </Box>
+        )}
 
         <Typography variant="body2" my={3}>
           {item.description}
         </Typography>
 
-        {showCheckoutBtn ? (
+        {showCheckoutBtn && (
           <Button
             component={NavLink}
             to={`/cart`}
@@ -70,8 +90,15 @@ const ItemDetail = ({ item }) => {
           >
             Finalizar compra
           </Button>
-        ) : (
-          <ItemCount stock={10} initial={1} onAdd={onAddHandler} />
+        )}
+
+        {stock && !showCheckoutBtn && (
+          <>
+            <Typography variant="body2" my={1}>
+              Stock disponible: {stock}
+            </Typography>
+            <ItemCount stock={stock} initial={initial} onAdd={onAddHandler} />
+          </>
         )}
       </Box>
     </Container>

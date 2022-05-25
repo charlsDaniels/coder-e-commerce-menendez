@@ -37,19 +37,19 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     fetchProducts();
-    console.log(categoryId);
   }, [categoryId]);
 
   return (
     <Box>
-      <Loader visible={loading} />
+      {loading && <Loader />}
 
       {products && (
         <Box>
           <Typography
             variant="h5"
             mb={5}
-            sx={{ textAlign: "center", textTransform: "capitalize" }}
+            textAlign="center"
+            textTransform="capitalize"
           >
             {categoryId}
           </Typography>

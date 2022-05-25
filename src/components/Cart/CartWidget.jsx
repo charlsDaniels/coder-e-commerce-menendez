@@ -8,14 +8,14 @@ import { CartContext } from "../../hoc/providers/CartProvider";
 import { useContext } from "react";
 
 const CartWidget = () => {
-  const cartContext = useContext(CartContext)
+  const cartContext = useContext(CartContext);
 
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Ver carrito">
         <NavLink to="/cart">
           <IconButton sx={{ p: 0 }}>
-            <Badge badgeContent={cartContext.cart.length} color="success">
+            <Badge badgeContent={cartContext.numberOfItems()} color="success">
               <ShoppingCart
                 alt="Carrito de compras"
                 color="secondary"
