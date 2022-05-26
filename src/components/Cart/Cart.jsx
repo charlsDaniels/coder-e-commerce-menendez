@@ -52,7 +52,7 @@ const Cart = () => {
       >
         Carrito
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 20 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: 'wrap' }}>
         <Box
           sx={{
             display: "flex",

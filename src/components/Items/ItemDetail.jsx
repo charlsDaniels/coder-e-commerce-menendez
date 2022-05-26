@@ -33,16 +33,19 @@ const ItemDetail = ({ item }) => {
   };
 
   return (
-    <Container sx={{ display: "flex", mt: 6, ml: 7, gap: 5 }}>
-      <Box
-        component="img"
-        sx={{
-          width: 265,
-        }}
-        alt={item.description}
-        src={item.pictureUrl}
-      />
+    <Box sx={{ display: "flex", mt: 6, ml: 7, gap: 5 }}>
       <Box>
+        <Box
+          component="img"
+          sx={{
+            width: 265,
+          }}
+          alt={item.description}
+          src={item.pictureUrl}
+        />
+      </Box>
+
+      <Box sx={{height: 400}}>
         <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
           {productTitle()}
         </Typography>
@@ -99,7 +102,7 @@ const ItemDetail = ({ item }) => {
           </>
         )}
       </Box>
-    </Container>
+    </Box>
   );
 };
 

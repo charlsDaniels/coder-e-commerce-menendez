@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { CartContext } from "../../hoc/providers/CartProvider";
 import { useContext } from "react";
@@ -12,6 +13,11 @@ const CartItem = ({ item }) => {
 
   const productTitle = (item) => {
     return `${item.categoryId.slice(0, -1)} ${item.title}`;
+  };
+
+  const quantityDetailText = (size) => {
+    const text = size.quantity > 1 ? "unidades" : "unidad";
+    return `Talle ${size.id}: ${size.quantity} ${text}`;
   };
 
   const totalAmountByItem = (item) => {
@@ -25,35 +31,54 @@ const CartItem = ({ item }) => {
       key={item.id}
       sx={{
         display: "flex",
-        gap: 10,
+        flexDirection: "column",
         borderRadius: 3,
-        height: 230,
         mb: 3,
       }}
     >
-      <CardContent>
-        <Typography
-          variant="h6"
-          sx={{
-            textTransform: "capitalize",
-          }}
-        >
-          {productTitle(item)}
-        </Typography>
-        <Typography variant="body2" ml={2}>
-          ${item.price},00
-        </Typography>
-
-        <Typography variant="body1" mt={2} mb={0}>
-          Cantidad
-        </Typography>
-
-        {item.sizes.map((size) => (
-          <Typography key={size.id} variant="body2" ml={2} sx={{ width: 200 }}>
-            Talle {size.id}: {size.quantity} unidades
+      <CardContent
+        sx={{
+          display: "flex",
+        }}
+      >
+        <Box>
+          <Typography
+            variant="h6"
+            sx={{
+              textTransform: "capitalize",
+            }}
+          >
+            {productTitle(item)}
           </Typography>
-        ))}
+          <Typography variant="body2" ml={2}>
+            ${item.price},00
+          </Typography>
 
+          <Typography variant="body1" mt={2} mb={0}>
+            Cantidad
+          </Typography>
+
+          {item.sizes.map((size) => (
+            <Typography
+              key={size.id}
+              variant="body2"
+              ml={2}
+              sx={{ width: 200 }}
+            >
+              {quantityDetailText(size)}
+            </Typography>
+          ))}
+        </Box>
+        <Box width={122}>
+          <CardMedia
+            component="img"
+            sx={{ objectFit: "contain" }}
+            image={item.pictureUrl}
+            alt={item.title}
+          />
+        </Box>
+      </CardContent>
+      <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: 'center' }}>
         <Typography variant="body1" mt={2} mb={2}>
           Total producto: ${totalAmountByItem(item)}
         </Typography>
@@ -65,13 +90,7 @@ const CartItem = ({ item }) => {
         >
           Eliminar
         </Button>
-      </CardContent>
-      <CardMedia
-        component="img"
-        sx={{ objectFit: "contain" }}
-        image={item.pictureUrl}
-        alt={item.title}
-      />
+      </Box>
     </Card>
   );
 };
