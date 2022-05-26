@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -29,7 +28,7 @@ const ItemDetail = ({ item }) => {
   };
 
   const productTitle = () => {
-    return `${item.categoryId.slice(0, -1)} ${item.title}`;
+    return `${item.categoryDescription.slice(0, -1)} ${item.title}`;
   };
 
   return (
@@ -45,11 +44,11 @@ const ItemDetail = ({ item }) => {
         />
       </Box>
 
-      <Box sx={{height: 400}}>
-        <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
+      <Box height={400}>
+        <Typography variant="h5" textTransform="capitalize">
           {productTitle()}
         </Typography>
-        <Typography variant="body2" ml={2}>
+        <Typography variant="body1" ml={2}>
           ${item.price},00
         </Typography>
         <Typography variant="body2" mt={2}>

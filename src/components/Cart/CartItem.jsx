@@ -12,7 +12,7 @@ const CartItem = ({ item }) => {
   const cartContext = useContext(CartContext);
 
   const productTitle = (item) => {
-    return `${item.categoryId.slice(0, -1)} ${item.title}`;
+    return `${item.categoryDescription.slice(0, -1)} ${item.title}`;
   };
 
   const quantityDetailText = (size) => {
@@ -80,7 +80,7 @@ const CartItem = ({ item }) => {
       </CardContent>
       <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: 'center' }}>
         <Typography variant="body1" mt={2} mb={2}>
-          Total producto: ${totalAmountByItem(item)}
+          Total producto: ${totalAmountByItem(item)},00
         </Typography>
         <Button
           color="error"

@@ -3,21 +3,21 @@ import Box from "@mui/material/Box";
 import CartWidget from "../../../Cart/CartWidget";
 import { NavLink } from "react-router-dom";
 
-const NavigationItems = ({ pages }) => {
+const NavigationItems = ({ categories }) => {
   return (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        {pages.map((page, index) => (
+        {categories.map((cat) => (
           <Button
             component={NavLink}
-            to={`/category/${page}`}
+            to={`/category/${cat.description}`}
             style={({ isActive }) =>
               isActive ? {color: "#fff", textDecoration: 'underline'} : {color: "#000"}
             }
-            key={index}
+            key={cat.id}
             sx={{ my: 2, display: "block", fontSize: 16 }}
           >
-            {page}
+            {cat.description}
           </Button>
         ))}
       </Box>

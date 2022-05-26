@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 
-const AsideMenu = ({ pages }) => {
+const AsideMenu = ({ categories }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -48,15 +48,15 @@ const AsideMenu = ({ pages }) => {
           display: { xs: "block", md: "none" },
         }}
       >
-        {pages.map((page) => (
+        {categories.map((cat) => (
           <MenuItem
             component={Link}
-            to={`/category/${page}`}
-            key={page}
+            to={`/category/${cat.description}`}
+            key={cat.id}
             onClick={handleCloseNavMenu}
           >
             <Typography textAlign="center" textTransform="capitalize">
-              {page}
+              {cat.description}
             </Typography>
           </MenuItem>
         ))}

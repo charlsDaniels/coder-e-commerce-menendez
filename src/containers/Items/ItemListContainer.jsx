@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import ItemList from "../../components/Items/ItemList";
 import Loader from "../../components/UI/Loader";
-import { productsDb } from "../../db/db";
 import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const { categoryId } = useParams();
@@ -16,18 +16,22 @@ const ItemListContainer = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const products = await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (categoryId) {
-            resolve(
-              productsDb.filter((product) => product.categoryId === categoryId)
-            );
-          } else {
-            resolve(productsDb);
-          }
-        }, 2000);
-      });
-      setProducts(products);
+      
+      const db = getFirestore();
+      const productsCollection = collection(db, "products");
+
+      let response;
+
+      if (categoryId) {
+        const q = query(
+          productsCollection,
+          where("categoryCode", "==", categoryId.toUpperCase())
+        );
+        response = await getDocs(q);
+      } else {
+        response = await getDocs(productsCollection);
+      }
+      setProducts(response.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     } catch (error) {
       console.log(error);
     } finally {

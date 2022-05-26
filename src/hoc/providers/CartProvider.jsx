@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -15,7 +15,7 @@ const CartProvider = ({ children }) => {
             (size) => size.id === item.size
           );
           const sizes = [..._item.sizes];
-          if (sizeIndex != -1) {
+          if (sizeIndex !== -1) {
             sizes[sizeIndex].quantity += quantity;
           } else {
             sizes.push({
@@ -48,11 +48,6 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  //este useEffect lo dejo solo para mostrar lo que se agrega al carrito, después se saca.
-  // useEffect(() => {
-  //   console.log(cart);
-  // }, [cart]);
-
   const removeItem = (item) => {
     const newCart = cart.filter((_item) => _item.id !== item.id);
     setCart(newCart);
@@ -61,7 +56,7 @@ const CartProvider = ({ children }) => {
   const clear = () => setCart([]);
 
   const isInCart = (item) => {
-    return cart.some((_item) => _item.id == item.id);
+    return cart.some((_item) => _item.id === item.id);
   };
 
   const numberOfItems = () => {
