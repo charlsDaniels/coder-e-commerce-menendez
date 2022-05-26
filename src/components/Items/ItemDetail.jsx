@@ -18,7 +18,7 @@ const ItemDetail = ({ item }) => {
   const [showCheckoutBtn, setShowCheckoutBtn] = useState(false);
 
   const onAddHandler = (quantity) => {
-    cartContext.addItem({...item, size: selectedSize}, quantity);
+    cartContext.addItem({ ...item, size: selectedSize }, quantity);
     setShowCheckoutBtn(true);
   };
 
@@ -62,11 +62,9 @@ const ItemDetail = ({ item }) => {
                 <Button
                   key={size.id}
                   onClick={() => selectSizeHandler(size)}
-                  sx={{
-                    "&:focus": {
-                      backgroundColor: "#3B253B",
-                      color: "#fff",
-                    },
+                  style={{
+                    color: selectedSize === size.id && "#fff",
+                    backgroundColor: selectedSize === size.id && "#3B253B",
                   }}
                 >
                   {size.id}

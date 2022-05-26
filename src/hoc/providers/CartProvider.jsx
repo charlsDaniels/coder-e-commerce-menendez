@@ -49,9 +49,9 @@ const CartProvider = ({ children }) => {
   };
 
   //este useEffect lo dejo solo para mostrar lo que se agrega al carrito, después se saca.
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  // useEffect(() => {
+  //   console.log(cart);
+  // }, [cart]);
 
   const removeItem = (item) => {
     const newCart = cart.filter((_item) => _item.id !== item.id);

@@ -17,7 +17,7 @@ const Brand = () => {
         textDecoration: 'none'
       }}
     >
-      CharlClothes
+      CharlTops
     </Typography>
   )
 }
