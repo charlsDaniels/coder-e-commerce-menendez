@@ -5,7 +5,7 @@ import ItemList from "../../components/Items/ItemList";
 import Loader from "../../components/UI/Loader";
 import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { fetchProducts } from "../../services/firebase/querys";
 
 const ItemListContainer = () => {
   const { categoryId } = useParams();
@@ -13,31 +13,22 @@ const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchProducts = async () => {
-    try {
+  useEffect(() => {
+    async function fetchData() {
       setLoading(true);
-      
-      const db = getFirestore();
-      const productsCollection = collection(db, "products");
-
-      let response;
-
-      if (categoryId) {
-        const q = query(
-          productsCollection,
-          where("categoryCode", "==", categoryId.toUpperCase())
+      try {
+        const products = await fetchProducts(categoryId);
+        setProducts(
+          products.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         );
-        response = await getDocs(q);
-      } else {
-        response = await getDocs(productsCollection);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      setProducts(response.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
-  };
+    fetchData();
+  }, [categoryId]);
 
   useEffect(() => {
     fetchProducts();

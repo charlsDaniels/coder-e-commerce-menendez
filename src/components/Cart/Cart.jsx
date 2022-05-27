@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { CartContext } from "../../hoc/providers/CartProvider";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import CartItemList from "./CartItemList";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import CheckoutForm from "./CheckoutForm";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
@@ -52,32 +52,16 @@ const Cart = () => {
       >
         Carrito
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: 'wrap' }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {cartContext.cart.length && <CartItemList />}
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h5" my={3}>
-            Total carrito: ${cartContext.totalAmount()},00
-          </Typography>
-
-          <Button color="secondary" variant="contained">
-            Pagar
-          </Button>
-        </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 12,
+          flexWrap: "wrap",
+        }}
+      >
+        <CartItemList />
+        <CheckoutForm />
       </Box>
     </>
   );

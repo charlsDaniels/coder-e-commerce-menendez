@@ -10,7 +10,7 @@ import Cart from "./components/Cart/Cart";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#96C5B0",
+      main: "#c4e7ed",
       textColor: "white",
     },
     secondary: {
@@ -36,10 +36,7 @@ const App = () => {
                 path="/item/:productId"
                 element={<ItemDetailContainer />}
               ></Route>
-              <Route
-                path="/cart"
-                element={<Cart />}
-              ></Route>
+              <Route path="/cart" element={<Cart />}></Route>
             </Routes>
           </Container>
         </CartProvider>

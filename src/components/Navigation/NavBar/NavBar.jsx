@@ -5,20 +5,19 @@ import Brand from "../../Brand/Logo";
 import AsideMenu from "./Aside/AsideMenu";
 import NavigationItems from "./NavigationItems/NavigationItems";
 import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { fetchCategories } from "../../../services/firebase/querys";
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
 
-  const fetchCategories = async () => {
-    const db = getFirestore();
-    const categoriesCollection = collection(db, "categories");
-    const response = await getDocs(categoriesCollection);
-    setCategories(response.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-  };
-
   useEffect(() => {
-    fetchCategories();
+    async function fetchData() {
+      const categories = await fetchCategories();
+      setCategories(
+        categories.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+    }
+    fetchData();
   }, []);
 
   return (

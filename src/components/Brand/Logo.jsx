@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Brand = () => {
   return (
     <Typography
-      variant='h5'
+      variant='h4'
       noWrap
       component={Link}
       to="/"

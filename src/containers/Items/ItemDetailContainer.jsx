@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Loader from "../../components/UI/Loader";
 import ItemDetail from "../../components/Items/ItemDetail";
 import { useParams } from "react-router-dom";
-import { doc, getFirestore, getDoc } from "firebase/firestore";
+import { fetchProductById } from "../../services/firebase/querys";
 
 const ItemDetailContainer = () => {
   const { productId } = useParams();
@@ -11,33 +11,25 @@ const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchProduct = async () => {
-    try {
+  useEffect(() => {
+    async function fetchData() {
       setLoading(true);
-
-      const db = getFirestore();
-      const productRef = doc(db, "products", productId);
-      const response = await getDoc(productRef);
-      console.log(response);
-      setProduct({ id: response.id, ...response.data() });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+      try {
+        const product = await fetchProductById(productId);
+        setProduct({ id: product.id, ...product.data() });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
-  };
-
-  useEffect(() => {
-    fetchProduct();
+    fetchData();
   }, []);
-  useEffect(() => {
-    console.log(product);
-  }, [product]);
 
   return (
     <Box>
       {loading && <Loader />}
-      
+
       {product && <ItemDetail item={product} />}
     </Box>
   );

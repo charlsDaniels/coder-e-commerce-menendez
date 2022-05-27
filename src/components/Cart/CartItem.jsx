@@ -78,13 +78,22 @@ const CartItem = ({ item }) => {
           />
         </Box>
       </CardContent>
-      <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: 'center' }}>
-        <Typography variant="body1" mt={2} mb={2}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          mt: 1,
+          mb: 2,
+        }}
+      >
+        <Typography variant="body1">
           Total producto: ${totalAmountByItem(item)},00
         </Typography>
+
         <Button
           color="error"
-          variant="contained"
+          variant="outlined"
           size="small"
           onClick={() => cartContext.removeItem(item)}
         >
