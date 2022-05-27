@@ -89,7 +89,7 @@ const CheckoutForm = () => {
           Total carrito: ${cartContext.totalAmount()},00
         </Typography>
 
-        <Typography variant="body1">Completa tus datos!</Typography>
+        <Typography variant="body1" mt={5}>Completa tus datos para finalizar la compra!</Typography>
 
         <FormControl
           color="secondary"

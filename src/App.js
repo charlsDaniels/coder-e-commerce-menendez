@@ -25,7 +25,7 @@ const App = () => {
       <BrowserRouter>
         <CartProvider>
           <NavBar />
-          <Container maxWidth="lg" sx={{ mt: 6 }}>
+          <Container maxWidth="lg" sx={{ my: 6 }}>
             <Routes>
               <Route path="/" element={<ItemListContainer />}></Route>
               <Route
