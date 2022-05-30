@@ -11,18 +11,19 @@ const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const product = await fetchProductById(productId);
-        setProduct({ id: product.id, ...product.data() });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = async() => {
+    setLoading(true);
+    try {
+      const product = await fetchProductById(productId);
+      setProduct({ id: product.id, ...product.data() });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
 

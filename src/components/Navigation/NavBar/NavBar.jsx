@@ -10,13 +10,14 @@ import { fetchCategories } from "../../../services/firebase/querys";
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
 
+  const fetchData = async() => {
+    const categories = await fetchCategories();
+    setCategories(
+      categories.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+    );
+  };
+
   useEffect(() => {
-    async function fetchData() {
-      const categories = await fetchCategories();
-      setCategories(
-        categories.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-      );
-    }
     fetchData();
   }, []);
 

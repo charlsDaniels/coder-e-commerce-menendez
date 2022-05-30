@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Item = ({ item }) => {
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 250 }}>
       <Link to={`/item/${item.id}`} style={{ textDecoration: "none" }}>
         <Card
           elevation={5}

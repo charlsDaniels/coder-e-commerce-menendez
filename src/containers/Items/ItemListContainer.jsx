@@ -13,25 +13,20 @@ const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const products = await fetchProducts(categoryId);
-        setProducts(
-          products.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        );
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const products = await fetchProducts(categoryId);
+      setProducts(products.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-  }, [categoryId]);
+  };
 
   useEffect(() => {
-    fetchProducts();
+    fetchData();
   }, [categoryId]);
 
   return (
