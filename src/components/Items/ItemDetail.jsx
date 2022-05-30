@@ -12,19 +12,23 @@ const ItemDetail = ({ item }) => {
   const cartContext = useContext(CartContext);
 
   const [stock, setStock] = useState(null);
-  const [initial, setInitial] = useState(null);
+  const [initialCount, setInitialCount] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [showCheckoutBtn, setShowCheckoutBtn] = useState(false);
 
   const onAddHandler = (quantity) => {
-    cartContext.addItem({ ...item, size: selectedSize }, quantity);
+    const selectedQuantity =
+      initialCount == 1 ? quantity - 1 : quantity - initialCount;
+
+    cartContext.addItem({ ...item, size: selectedSize }, selectedQuantity);
     setShowCheckoutBtn(true);
   };
 
   const selectSizeHandler = (size) => {
+    const initialCount = cartContext.getItemInitialCount(item.id, size.id);
+    setInitialCount(initialCount);
     setSelectedSize(size.id);
     setStock(size.stock);
-    setInitial(1);
   };
 
   const productTitle = () => {
@@ -32,7 +36,7 @@ const ItemDetail = ({ item }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", mt: 6, ml: 7, gap: 5 }}>
+    <Box sx={{ display: "flex", mt: 6, ml: 7, gap: 5, flexWrap: "wrap" }}>
       <Box>
         <Box
           component="img"
@@ -97,7 +101,11 @@ const ItemDetail = ({ item }) => {
             <Typography variant="body2" my={1}>
               Stock disponible: {stock}
             </Typography>
-            <ItemCount stock={stock} initial={initial} onAdd={onAddHandler} />
+            <ItemCount
+              stock={stock}
+              initial={initialCount}
+              onAdd={onAddHandler}
+            />
           </>
         )}
       </Box>

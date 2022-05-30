@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { CartContext } from "../../hoc/providers/CartProvider";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const CartItem = ({ item }) => {
   const cartContext = useContext(CartContext);
@@ -39,17 +40,23 @@ const CartItem = ({ item }) => {
       <CardContent
         sx={{
           display: "flex",
+          flexWrap: "wrap-reverse",
         }}
       >
         <Box>
-          <Typography
-            variant="h6"
-            sx={{
-              textTransform: "capitalize",
-            }}
+          <Link
+            to={`/item/${item.id}`}
+            style={{ textDecoration: "none", color: "#000" }}
           >
-            {productTitle(item)}
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                textTransform: "capitalize",
+              }}
+            >
+              {productTitle(item)}
+            </Typography>
+          </Link>
           <Typography variant="body2" ml={2}>
             ${item.price},00
           </Typography>
@@ -78,6 +85,7 @@ const CartItem = ({ item }) => {
           />
         </Box>
       </CardContent>
+
       <Box
         sx={{
           display: "flex",

@@ -48,6 +48,20 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const getItemInitialCount = (itemId, sizeId) => {
+    let initial = 0;
+
+    const item = cart.find((item) => item.id === itemId);
+    if (item) {
+      const size = item.sizes.find((size) => size.id === sizeId);
+      if (size) {
+        initial = size.quantity;
+      }
+    }
+
+    return initial;
+  };
+
   const removeItem = (item) => {
     const newCart = cart.filter((_item) => _item.id !== item.id);
     setCart(newCart);
@@ -86,6 +100,7 @@ const CartProvider = ({ children }) => {
       value={{
         cart,
         addItem,
+        getItemInitialCount,
         removeItem,
         clear,
         numberOfItems,

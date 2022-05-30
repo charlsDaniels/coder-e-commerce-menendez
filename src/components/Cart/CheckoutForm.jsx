@@ -9,6 +9,7 @@ import { useState, useContext } from "react";
 import { CartContext } from "../../hoc/providers/CartProvider";
 import { addOrder } from "../../services/firebase/querys";
 import { useNavigate } from "react-router-dom";
+import { serverTimestamp } from "firebase/firestore";
 
 const CheckoutForm = () => {
   const cartContext = useContext(CartContext);
@@ -40,6 +41,8 @@ const CheckoutForm = () => {
       buyer: user,
       items: cartContext.cart,
       total: cartContext.totalAmount(),
+      status: "generada",
+      createdAt: serverTimestamp(),
     };
     try {
       const { id } = await addOrder(order);
@@ -61,12 +64,19 @@ const CheckoutForm = () => {
     return true;
   };
 
+  const validatePhone = () => {
+    if (user.phone) {
+      return String(user.phone).match(/^\d+$/);
+    }
+    return true;
+  };
+
   const formIsComplete = () => {
     return Object.values(user).every((value) => value);
   };
 
   const formIsValid = () => {
-    return formIsComplete() && validateEmail();
+    return formIsComplete() && validateEmail() && validatePhone();
   };
 
   return (
@@ -89,7 +99,9 @@ const CheckoutForm = () => {
           Total carrito: ${cartContext.totalAmount()},00
         </Typography>
 
-        <Typography variant="body1" mt={5}>Completa tus datos para finalizar la compra!</Typography>
+        <Typography variant="body1" mt={5}>
+          Completa tus datos para finalizar la compra!
+        </Typography>
 
         <FormControl
           color="secondary"
@@ -114,6 +126,8 @@ const CheckoutForm = () => {
             color="secondary"
             size="small"
             value={user.phone}
+            error={!validatePhone()}
+            helperText={!validatePhone() && "Debes ingresar sólo números."}
           />
           <TextField
             label="Email"
@@ -123,6 +137,7 @@ const CheckoutForm = () => {
             type="email"
             value={user.email}
             error={!validateEmail()}
+            helperText={!validateEmail() && "Debes ingresar un email válido."}
           />
 
           <Button

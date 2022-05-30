@@ -1,11 +1,11 @@
 import {
-  getFirestore,
   collection,
   doc,
   getDoc,
   getDocs,
-  addDoc,
+  getFirestore,
   query,
+  addDoc,
   where,
 } from "firebase/firestore";
 
