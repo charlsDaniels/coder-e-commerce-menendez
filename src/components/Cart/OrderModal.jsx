@@ -31,7 +31,7 @@ const OrderModal = ({ orderId, onClose }) => {
         <Typography variant="h6" component="h2">
           Recibimos tu solicitud!
         </Typography>
-        <Typography>Tu nro. de orden es: {orderId}</Typography>
+        <Typography>El código de tu orden es: {orderId}</Typography>
 
         <Button variant="outlined" color="secondary" onClick={onClose}>
           Aceptar
