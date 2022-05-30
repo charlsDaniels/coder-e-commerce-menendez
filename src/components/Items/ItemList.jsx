@@ -7,8 +7,8 @@ const ItemList = ({ items }) => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-around",
-        gap: 2,
+        justifyContent: "center",
+        gap: 5,
         flexWrap: "wrap",
       }}
     >
