@@ -10,6 +10,7 @@ import { CartContext } from "../../hoc/providers/CartProvider";
 import { addOrder } from "../../services/firebase/querys";
 import { useNavigate } from "react-router-dom";
 import { serverTimestamp } from "firebase/firestore";
+import Loader from "../UI/Loader";
 
 const CheckoutForm = () => {
   const cartContext = useContext(CartContext);
@@ -23,6 +24,7 @@ const CheckoutForm = () => {
 
   const [openModal, setShowModal] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleCloseModal = () => {
     cartContext.clear();
@@ -37,19 +39,22 @@ const CheckoutForm = () => {
   };
 
   const handleSubmit = async () => {
-    const order = {
-      buyer: user,
-      items: cartContext.cart,
-      total: cartContext.totalAmount(),
-      status: "generada",
-      createdAt: serverTimestamp(),
-    };
+    setLoading(true);
     try {
+      const order = {
+        buyer: user,
+        items: cartContext.cart,
+        total: cartContext.totalAmount(),
+        status: "generada",
+        createdAt: serverTimestamp(),
+      };
       const { id } = await addOrder(order);
       setOrderId(id);
       setShowModal(true);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,79 +85,83 @@ const CheckoutForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <>
+      {loading && <Loader />}
+      
+      {openModal && <OrderModal orderId={orderId} onClose={handleCloseModal} />}
+
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 2,
         }}
       >
-        <Typography variant="h5">
-          Total carrito: ${cartContext.totalAmount()},00
-        </Typography>
-
-        <Typography variant="body1" mt={5}>
-          Completa tus datos para finalizar la compra!
-        </Typography>
-
-        <FormControl
-          color="secondary"
-          onChange={handleInputChange}
+        <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             gap: 2,
           }}
-          fullWidth
         >
-          <TextField
-            label="Nombre"
-            name="name"
-            color="secondary"
-            size="small"
-            value={user.name}
-          />
-          <TextField
-            label="Teléfono"
-            name="phone"
-            color="secondary"
-            size="small"
-            value={user.phone}
-            error={!validatePhone()}
-            helperText={!validatePhone() && "Debes ingresar sólo números."}
-          />
-          <TextField
-            label="Email"
-            name="email"
-            color="secondary"
-            size="small"
-            type="email"
-            value={user.email}
-            error={!validateEmail()}
-            helperText={!validateEmail() && "Debes ingresar un email válido."}
-          />
+          <Typography variant="h5">
+            Total carrito: ${cartContext.totalAmount()},00
+          </Typography>
 
-          <Button
+          <Typography variant="body1" mt={5}>
+            Completa tus datos para finalizar la compra!
+          </Typography>
+
+          <FormControl
             color="secondary"
-            variant="contained"
-            onClick={handleSubmit}
-            disabled={!formIsValid()}
+            onChange={handleInputChange}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+            fullWidth
           >
-            Comprar
-          </Button>
-        </FormControl>
-      </Box>
+            <TextField
+              label="Nombre"
+              name="name"
+              color="secondary"
+              size="small"
+              value={user.name}
+            />
+            <TextField
+              label="Teléfono"
+              name="phone"
+              color="secondary"
+              size="small"
+              value={user.phone}
+              error={!validatePhone()}
+              helperText={!validatePhone() && "Debes ingresar sólo números."}
+            />
+            <TextField
+              label="Email"
+              name="email"
+              color="secondary"
+              size="small"
+              type="email"
+              value={user.email}
+              error={!validateEmail()}
+              helperText={!validateEmail() && "Debes ingresar un email válido."}
+            />
 
-      {openModal && <OrderModal orderId={orderId} onClose={handleCloseModal} />}
-    </Box>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={handleSubmit}
+              disabled={!formIsValid()}
+            >
+              Comprar
+            </Button>
+          </FormControl>
+        </Box>
+      </Box>
+    </>
   );
 };
 
