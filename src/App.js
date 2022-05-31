@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartProvider from "./hoc/providers/CartProvider";
 import Cart from "./components/Cart/Cart";
+import NotFound from "./components/Navigation/NotFound";
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,7 @@ const App = () => {
                 element={<ItemDetailContainer />}
               ></Route>
               <Route path="/cart" element={<Cart />}></Route>
+              <Route path="/*" element={<NotFound />}></Route>
             </Routes>
           </Container>
         </CartProvider>
