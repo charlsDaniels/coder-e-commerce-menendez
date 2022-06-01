@@ -4,41 +4,20 @@ import { CartContext } from "../../hoc/providers/CartProvider";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CartItemList from "./CartItemList";
-import { Link } from "react-router-dom";
 import CheckoutForm from "./CheckoutForm";
+import Empty from "../Navigation/Empty";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
 
   if (cartContext.isEmpty()) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 5,
-          mt: 10,
-        }}
-      >
-        <Typography variant="h5" textAlign="center">
-          Todavía no agregaste productos al carrito...
-        </Typography>
-        <Typography
-          variant="h5"
-          noWrap
-          component={Link}
-          to="/"
-          sx={{
-            flexGrow: 0.8,
-            fontFamily: "monospace",
-            fontWeight: 700,
-            textDecoration: "none",
-          }}
-        >
-          Empezá a comprar!
-        </Typography>{" "}
-      </Box>
+      <Empty
+        messages={[
+          "Todavía no agregaste productos al carrito...",
+          "Empezá a comprar!",
+        ]}
+      />
     );
   }
 
