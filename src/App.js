@@ -28,17 +28,17 @@ const App = () => {
           <NavBar />
           <Container maxWidth="lg" sx={{ my: 6 }}>
             <Routes>
-              <Route path="/" element={<ItemListContainer />}></Route>
+              <Route path="/" element={<ItemListContainer />} />
               <Route
                 path="/category/:categoryId"
                 element={<ItemListContainer />}
-              ></Route>
+              />
               <Route
                 path="/item/:productId"
                 element={<ItemDetailContainer />}
-              ></Route>
-              <Route path="/cart" element={<Cart />}></Route>
-              <Route path="/*" element={<NotFound />}></Route>
+              />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </Container>
         </CartProvider>

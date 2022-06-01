@@ -3,21 +3,31 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import ItemList from "../../components/Items/ItemList";
 import Loader from "../../components/UI/Loader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { fetchProducts } from "../../services/firebase/querys";
 
 const ItemListContainer = () => {
   const { categoryId } = useParams();
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate();
 
   const fetchData = async () => {
-    setLoading(true);
     try {
-      const products = await fetchProducts(categoryId);
-      setProducts(products.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      setLoading(true);
+      const response = await fetchProducts(categoryId);
+      const products = response.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      if (products.length) {
+        setProducts(products);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     } finally {
