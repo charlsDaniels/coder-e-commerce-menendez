@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -29,7 +29,7 @@ const CartProvider = ({ children }) => {
           });
         }
       }, []);
-      setCart(newCart);
+      persistCart(newCart);
     } else {
       const sizes = [
         {
@@ -44,8 +44,13 @@ const CartProvider = ({ children }) => {
           sizes,
         },
       ];
-      setCart(newCart);
+      persistCart(newCart);
     }
+  };
+
+  const persistCart = (cart) => {
+    setCart(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   const getItemInitialCount = (itemId, sizeId) => {
@@ -64,10 +69,13 @@ const CartProvider = ({ children }) => {
 
   const removeItem = (item) => {
     const newCart = cart.filter((_item) => _item.id !== item.id);
-    setCart(newCart);
+    persistCart(newCart);
   };
 
-  const clear = () => setCart([]);
+  const clear = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
 
   const isInCart = (item) => {
     return cart.some((_item) => _item.id === item.id);
@@ -94,6 +102,13 @@ const CartProvider = ({ children }) => {
       0
     );
   };
+
+  useEffect(() => {
+    const cart = localStorage.getItem("cart");
+    if (cart) {
+      setCart(JSON.parse(cart));
+    }
+  }, []);
 
   return (
     <CartContext.Provider

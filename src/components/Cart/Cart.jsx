@@ -35,7 +35,10 @@ const Cart = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          gap: 12,
+          gap: {
+            xs: 4,
+            md: 12
+          },
           flexWrap: "wrap",
         }}
       >
